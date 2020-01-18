@@ -9,9 +9,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BlogListComponent } from './components/blog-list/blog-list.component';
 import { BlogDetailsComponent } from './components/blog-details/blog-details.component';
+import { fakeBackendProvider } from './helpers/fake-backend';
+import { ToastrModule } from 'ngx-toastr';  
 
 @NgModule({
   declarations: [
@@ -27,9 +29,15 @@ import { BlogDetailsComponent } from './components/blog-details/blog-details.com
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    NoopAnimationsModule
+    ReactiveFormsModule,
+    NoopAnimationsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-center',
+      closeButton: true,
+      maxOpened: 3
+    })  
   ],
-  providers: [],
+  providers: [fakeBackendProvider],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
