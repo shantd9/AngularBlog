@@ -5,11 +5,10 @@ import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 
 // array in local storage for registered users
 let users = JSON.parse(localStorage.getItem('users')) || [];
-
+let blogs = JSON.parse(localStorage.getItem('blogs')) || [];
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        console.log('intercepting!')
         const { url, method, headers, body } = request;
 
         // wrap in delayed observable to simulate server api call
@@ -31,6 +30,16 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return getUserById();
                 case url.match(/\/users\/\d+$/) && method === 'DELETE':
                     return deleteUser();
+                case url.endsWith('/blogs') && method === 'POST':
+                    return createBlog();
+                // case url.endsWith('/users/authenticate') && method === 'POST':
+                //     return authenticate();
+                case url.endsWith('/blogs') && method === 'GET':
+                    return getBlogs();
+                // case url.match(/\/users\/\d+$/) && method === 'GET':
+                //     return getUserById();
+                // case url.match(/\/users\/\d+$/) && method === 'DELETE':
+                //     return deleteUser();
                 default:
                     // pass through any requests not handled above
                     return next.handle(request);
@@ -53,6 +62,16 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             return ok();
         }
 
+        function createBlog() {
+            console.log('creating blog!')
+            const blog = body
+            
+            blog.id = blogs.length ? Math.max(...blogs.map(x => x.id)) + 1 : 1;
+            blogs.push(blog);
+            localStorage.setItem('blogs', JSON.stringify(blogs));
+            return ok();
+        }
+
         function authenticate() {
             const { username, password } = body;
             const user = users.find(x => x.username === username && x.password === password);
@@ -69,6 +88,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         function getUsers() {
             if (!isLoggedIn()) return unauthorized();
             return ok(users);
+        }
+
+        function getBlogs() {
+            if (!isLoggedIn()) return unauthorized();
+            return ok(blogs);
         }
 
         function getUserById() {
