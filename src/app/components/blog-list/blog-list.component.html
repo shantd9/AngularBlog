@@ -1,5 +1,5 @@
-<p>blog-list works!</p>
-<app-blog-details></app-blog-details>
-<app-blog-details></app-blog-details>
-<app-blog-details></app-blog-details>
-<app-blog-details></app-blog-details>
+<ul>
+    <li *ngFor="let blog of blogs">
+    Name::{{ blog.name }} Description:{{blog.description}}
+    </li>
+</ul>

@@ -19,6 +19,7 @@ import { UserDetailsComponent } from './components/user-details/user-details.com
 import { HomeComponent } from './components/home/home.component';  
 import { JwtInterceptor } from './helpers/fake-jwt.interceptor';
 import { ErrorInterceptor } from './helpers/error.interceptor';
+import { CreateBlogComponent } from './components/createblog/createblog.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { ErrorInterceptor } from './helpers/error.interceptor';
     UserListComponent,
     UserDetailsComponent,
     HomeComponent,
+    CreateBlogComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +41,7 @@ import { ErrorInterceptor } from './helpers/error.interceptor';
     FormsModule,
     ReactiveFormsModule,
     NoopAnimationsModule,
+
     ToastrModule.forRoot({
       positionClass: 'toast-top-center',
       closeButton: true,

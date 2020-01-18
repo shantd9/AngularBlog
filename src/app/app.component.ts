@@ -15,6 +15,7 @@ export class AppComponent implements OnInit, OnChanges{
     this.authenticationService.currentUser.subscribe(x=>{
       if(x)
       this.user = x.username
+      else this.user=null
     }
   )}
   ngOnChanges(){
@@ -28,5 +29,9 @@ export class AppComponent implements OnInit, OnChanges{
   onLogout(){
     this.authenticationService.logout()
     this.router.navigate(['login'])
+  }
+  
+  onCreateBlog() {
+    this.router.navigate(['home/blog/create'])
   }
 }

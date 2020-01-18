@@ -1,0 +1,20 @@
+<mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>Create Blog</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form #ngForm="ngForm" (ngSubmit)="onSubmit(ngForm)" class="example-form">
+        <mat-form-field>
+          <input matInput placeholder="Blog Name" name="name" ngModel required>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+         <textarea matInput placeholder="Blog Description" name="description" ngModel required></textarea>
+       </mat-form-field>
+       <mat-card-actions>
+        <button mat-raised-button color="primary">Create</button>
+      </mat-card-actions>
+      </form>
+    </mat-card-content>   
+</mat-card>
+  

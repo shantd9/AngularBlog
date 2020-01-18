@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   password = new FormControl('', [Validators.required])
   ngOnInit() {
     if (this.authenticationService.currentUserValue) { 
-      this.router.navigate(['/blogs']);
+      this.router.navigate(['/home']);
     }
   }
   onSubmit(ngForm:NgForm) {
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
     .subscribe(
  data => {
    this.toastr.success('You have successfully logged in', 'Login successful');
-   this.router.navigate(['/blogs']);
+   this.router.navigate(['/home']);
  },
  error => {
    this.toastr.error('Error logging in. Try again later!', 'Error');

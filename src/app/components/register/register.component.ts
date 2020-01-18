@@ -5,6 +5,7 @@ import { Validators, FormControl, FormGroup, NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
 import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/models/user';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -18,16 +19,24 @@ export class RegisterComponent implements OnInit {
   password = new FormControl('', [Validators.required])
   ngOnInit() {
     if (this.authenticationService.currentUserValue) { 
-      this.router.navigate(['/blogs']);
+      this.router.navigate(['/home']);
     }
   }
   onSubmit(ngForm:NgForm) {
+    let user: User
+    user = ngForm.value
+    user.createdAt = new Date(Date.now())
+
     this.userService.register(ngForm.value)
     .pipe(first())
     .subscribe(
         data => {
           this.toastr.success('You have successfully registered', 'Registration successful');
-          this.router.navigate(['/blogs']);
+          this.authenticationService.login(ngForm.value.username, ngForm.value.password).pipe(first()).subscribe(
+            data => {
+              this.router.navigate(['/home']);
+            }
+          )
         },
         error => {
           this.toastr.error('Error registering. Try again later!', 'Error');

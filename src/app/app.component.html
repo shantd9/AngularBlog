@@ -1,9 +1,10 @@
 <mat-toolbar color="primary" class="app-header">
-    <div><a href="https://www.google.com/" target="_blank" class="nav-bar">Shant's sample app</a></div>
+    <div><a routerLink="home" routerLinkActive="active">Shant's sample app</a></div>
     <span class="nav-tool-items">
       <a *ngIf="!this.user" mat-button routerLink="login" routerLinkActive="active">Log in</a>
       <a *ngIf="!this.user" mat-button mat-raised-button routerLink="register" routerLinkActive="active">Register</a>
       <button *ngIf="this.user" mat-raised-button (click)="onLogout()" color="primary">Logout</button >
+      <button *ngIf="this.user" mat-raised-button (click)="onCreateBlog()" color="primary">Create Blog</button >
       <span *ngIf="this.user" > Welcome, {{user}}</span>
     </span>
   </mat-toolbar>
