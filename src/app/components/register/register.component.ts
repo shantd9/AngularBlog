@@ -15,8 +15,6 @@ export class RegisterComponent implements OnInit {
   
 
   constructor(private userService: UserService, private authenticationService: AuthenticationService, private router: Router, private toastr: ToastrService) { }
-  username = new FormControl('', [Validators.required])
-  password = new FormControl('', [Validators.required])
   ngOnInit() {
     if (this.authenticationService.currentUserValue) { 
       this.router.navigate(['/home']);

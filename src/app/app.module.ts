@@ -34,10 +34,10 @@ import { CreateBlogComponent } from './components/createblog/createblog.componen
     CreateBlogComponent,
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     AngularMaterialModule,
     HttpClientModule,
-    AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     NoopAnimationsModule,

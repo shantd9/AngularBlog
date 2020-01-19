@@ -4,7 +4,7 @@
       <a *ngIf="!this.user" mat-button routerLink="login" routerLinkActive="active">Log in</a>
       <a *ngIf="!this.user" mat-button mat-raised-button routerLink="register" routerLinkActive="active">Register</a>
       <button *ngIf="this.user" mat-raised-button (click)="onLogout()" color="primary">Logout</button >
-      <button *ngIf="this.user" mat-raised-button (click)="onCreateBlog()" color="primary">Create Blog</button >
+      <a *ngIf="this.user" mat-raised-button (click)="onCreateBlog()" routerLinkActive="active">Create Blog</a >
       <span *ngIf="this.user" > Welcome, {{user}}</span>
     </span>
   </mat-toolbar>

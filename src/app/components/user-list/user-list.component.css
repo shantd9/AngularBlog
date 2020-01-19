@@ -1,0 +1,14 @@
+.example-card {
+    max-width: 600px;
+    margin-top: 50px;
+  }
+  
+.example-header-image {
+    background-size: cover;
+    padding: 25px;
+  }
+  .avatar { float:left;}
+  .title { margin-left: 50px}
+  li {   
+     list-style-type: none;
+  }

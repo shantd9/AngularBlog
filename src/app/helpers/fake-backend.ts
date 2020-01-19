@@ -36,10 +36,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 //     return authenticate();
                 case url.endsWith('/blogs') && method === 'GET':
                     return getBlogs();
-                // case url.match(/\/users\/\d+$/) && method === 'GET':
-                //     return getUserById();
-                // case url.match(/\/users\/\d+$/) && method === 'DELETE':
-                //     return deleteUser();
+                case url.match(/\/blogs\/\d+$/) && method === 'GET':
+                    return getBlogById();
+                case url.match(/\/blogs\/\d+$/) && method === 'DELETE':
+                    return deleteBlog();
                 default:
                     // pass through any requests not handled above
                     return next.handle(request);
@@ -97,9 +97,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
         function getUserById() {
             if (!isLoggedIn()) return unauthorized();
-
             const user = users.find(x => x.id == idFromUrl());
             return ok(user);
+        }
+
+        function getBlogById() {
+            if (!isLoggedIn()) return unauthorized();
+            const blog = blogs.find(x => x.id == idFromUrl());
+            return ok(blog);
         }
 
         function deleteUser() {
@@ -107,6 +112,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
             users = users.filter(x => x.id !== idFromUrl());
             localStorage.setItem('users', JSON.stringify(users));
+            return ok();
+        }
+
+        function deleteBlog() {
+            if (!isLoggedIn()) return unauthorized();
+
+            blogs = blogs.filter(x => x.id !== idFromUrl());
+            localStorage.setItem('blogs', JSON.stringify(blogs));
             return ok();
         }
 

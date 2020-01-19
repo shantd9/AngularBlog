@@ -5,14 +5,19 @@
     <mat-card-content>
       <form #ngForm="ngForm" (ngSubmit)="onSubmit(ngForm)" class="example-form">
         <mat-form-field>
-          <input matInput placeholder="Blog Name" name="name" ngModel required>
+          <input matInput placeholder="Blog Name" name="name" [ngModel]="blog?.name" required>
         </mat-form-field>
         <br>
         <mat-form-field>
-         <textarea matInput placeholder="Blog Description" name="description" ngModel required></textarea>
+          <input matInput placeholder="Blog Image Link" name="blogImage" [ngModel]="blog?.blogImage" required>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+         <textarea matInput placeholder="Blog Description" name="description" [ngModel]="blog?.description" required></textarea>
        </mat-form-field>
        <mat-card-actions>
-        <button mat-raised-button color="primary">Create</button>
+        <button *ngIf="!blog" mat-raised-button color="primary">CREATE</button>
+        <button *ngIf="blog" mat-raised-button color="primary">UPDATE</button>
       </mat-card-actions>
       </form>
     </mat-card-content>   

@@ -32,6 +32,6 @@ export class AppComponent implements OnInit, OnChanges{
   }
   
   onCreateBlog() {
-    this.router.navigate(['home/blog/create'])
+    this.router.navigate(['home/blogs/create'], { queryParams: { isEdit: false} })
   }
 }
